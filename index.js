@@ -63,8 +63,24 @@ $(function(){
                 items: 3
             }
         }
-    })
+    });
 
-   
+    let $qty_up = $(".qty .qty-up");
+    let $qty_down = $(".qty .qty-down")
+    let $qty_input = $(".qty .qty_input")
+    let qty_value = Number($qty_input.val())
+    
+    $qty_up.click(function(e){
+        if(qty_value < 10){
+            qty_value ++
+            $qty_input.val(qty_value)
+        }
+    })
+    $qty_down.click(function(e){
+        if(qty_value>0){
+            qty_value --
+            $qty_input.val(qty_value)
+        }
+    })
     
 });
