@@ -1,8 +1,13 @@
+<?php
+  $item_id = $_GET['item_id'];
+?>
 <section id="product" class="py-3">
       <div class="container">
         <div class="row">
+          <?php foreach ($product->getData() as $item) {
+            if($item['item_id']==$item_id){?>
           <div class="col-sm-6">
-            <img src="./assets/products/1.png" style="width: 500px;height: 500px;" alt="">
+            <img src="<?php echo $item['item_image']; ?>" style="width: 500px;height: 500px;" alt="">
             <div class="form-row pt-4 font-size-16 font-baloo">
               <div class="col">
                   <button type="submit" class="btn btn-danger form-control">Proceed to Buy</button>
@@ -13,8 +18,8 @@
             </div>
           </div>
           <div class="col-sm-6 py-5">
-            <h5 class="font-baloo font-size-20">Samsung Galaxy</h5>
-            <small>by samsung</small>
+            <h5 class="font-baloo font-size-20"><?php echo $item['item_name']; ?></h5>
+            <small>by <?php echo $item['item_brand']; ?></small>
             <div class="d-flex">
               <div class="rating text-warning font-size-12">
                   <span><i class="fas fa-star"></i></span>
@@ -30,7 +35,7 @@
             <table class="my-3">
               <tr class="font-rale font-size-14">
                   <td>M.R.P:</td>
-                  <td><strike>$162.00</strike></td>
+                  <td><strike>$<?php echo $item['item_price']; ?></strike></td>
               </tr>
               <tr class="font-rale font-size-14">
                   <td>Deal Price:</td>
@@ -64,6 +69,7 @@
                       <a href="#" class="font-rale font-size-12">1 Year <br>Warranty</a>
                   </div>
               </div>
+              <?php }}?>
           </div>
           <hr>
         <!--    !policy -->
