@@ -1,5 +1,12 @@
 <?php
   $product_shuffle = $product->getData();
+  if (isset($_POST['submit'])) { 
+    if(isset($_POST['top_sale_submit'])){
+      $params = array($_POST['user_id'],$_POST['item_id']);
+      $cart->insertIntoCart($params);
+    }
+  }
+
 ?>
 <section id="top-sale">
       <div class="container py-5">
@@ -23,7 +30,11 @@
                   <div class="price py-2">
                     <span><?php echo $item['item_price'] ?? '0'; ?></span>
                   </div>
-                  <button type="submit" name="top_sale_submit" class="btn btn-warning font-size-12">Add to Cart</button>
+                  <form method="post">
+                      <input type="hidden" name='user_id' value='<?php echo '1'; ?>'>
+                      <input type="hidden" name='item_id' value='<?php echo $item['item_id'] ?? '1'; ?>'>
+                      <button type="submit" name="top_sale_submit" class="btn btn-warning font-size-12">Add to Cart</button>
+                  </form>
                 </div>
               </div>
             </div>
