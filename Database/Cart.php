@@ -11,24 +11,31 @@ class Cart
         $this->db = $db;
     }
 
+    public  function insertIntoCart($params,$table='cart'){
+        if ($this->db->con != null){
+            if ($params != null){
+                $columns = implode(',', array_keys($params));
+                $values = implode(',' , array_values($params));
 
-    
+                $query_string = sprintf("INSERT INTO %s(%s) VALUES(%s)", $table, $columns, $values);
+                $result = $this->db->con->query($query_string);
+                return $result;
 
-    // insertIntoCart
-    public function insertIntoCart($params = null, $table= 'cart'){
-        print_r($params);
-        exit();
-        if (isset($item_id)){
-            $result = $this->db->con->query("INSERT INTO {$table} ({},{}) VALUES ({},{})");
-
-            $resultArray = array();
-
-            // fetch product data one by one
-            while ($item = mysqli_fetch_array($result, MYSQLI_ASSOC)){
-                $resultArray[] = $item;
             }
+        }
+    }
 
-            return $resultArray;
+
+    public  function addToCart($userid, $itemid){
+        if (isset($userid) && isset($itemid)){
+            $params = array(
+                "user_id" => $userid,
+                "item_id" => $itemid
+            );
+            $result = $this->insertIntoCart($params);
+            if($result){
+                header("Location: " . $_SERVER['PHP_SELF']);
+            }
         }
     }
 }

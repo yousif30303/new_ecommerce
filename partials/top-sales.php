@@ -1,11 +1,11 @@
 <?php
   $product_shuffle = $product->getData();
-  if (isset($_POST['submit'])) { 
-    if(isset($_POST['top_sale_submit'])){
-      $params = array($_POST['user_id'],$_POST['item_id']);
-      $cart->insertIntoCart($params);
-    }
+  if($_SERVER['REQUEST_METHOD'] == "POST"){
+    if (isset($_POST['top_sale_submit'])){
+      // call method addToCart
+      $cart->addToCart($_POST['user_id'], $_POST['item_id']);
   }
+}
 
 ?>
 <section id="top-sale">
