@@ -8,5 +8,6 @@
   $product = new Product($db);
 
   $cart = new Cart($db);
+  $Cart = new Cart($db);
 
 ?>
