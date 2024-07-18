@@ -6,6 +6,7 @@
         }
 
     }
+    print_r($Cart->getCartId($product->getData('cart')));
 ?>
 <section id="cart" class="py-3">
         <div class="container-fluid w-75">

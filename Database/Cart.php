@@ -39,15 +39,6 @@ class Cart
         }
     }
 
-        // get item_it of shopping cart list
-        public function getCartId($cartArray = null, $key = "item_id"){
-            if ($cartArray != null){
-                $cart_id = array_map(function ($value) use($key){
-                    return $value[$key];
-                }, $cartArray);
-                return $cart_id;
-            }
-        }
 
             // calculate sub total
         public function getSum($arr){
@@ -69,6 +60,17 @@ class Cart
                 return $result;
             }
         }
+
+         // get item_it of shopping cart list
+         public function getCartId($cartArray = null, $key = "item_id"){
+            if ($cartArray != null){
+                $cart_id = array_map(function ($value) use($key){
+                    return $value[$key];
+                }, $cartArray);
+                return $cart_id;
+            }
+        }
+        
 }
 
 
