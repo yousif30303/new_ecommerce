@@ -67,23 +67,46 @@ $(function(){
 
     let $qty_up = $(".qty .qty-up");
     let $qty_down = $(".qty .qty-down")
+    let $deal_price = $("#deal-price")
+    $deal_price_amount = parseInt($deal_price.text())
+    //$product_price = parseInt($product_price.text()).toFixed(2)
+
     //let $qty_input = $(".qty .qty_input")
     //let qty_value = Number($qty_input.val())
     
     $qty_up.click(function(e){
         let $qty_input = $(`.qty_input[data-id=${$(this).data("id")}]`)
         let qty_value = Number($qty_input.val())
+        let $product_price = $(`.product_price[data-id=${$(this).data("id")}]`);
         if(qty_value < 10){
-            qty_value ++
-            $qty_input.val(qty_value)
+            $.ajax({url:"partials/ajax.php",type:"post",data:{itemid:$(this).data("id")} , success:function(result){
+                qty_value ++
+                let obj = JSON.parse(result);
+                let item_price = obj[0]['item_price'];
+                let final_price = item_price * qty_value
+                $deal_price_amount = $deal_price_amount  + final_price - item_price;
+                $deal_price.text($deal_price_amount);
+                $qty_input.val(qty_value)
+                $product_price.text(final_price)
+            }})
         }
     })
     $qty_down.click(function(e){
         let $qty_input = $(`.qty_input[data-id=${$(this).data("id")}]`)
         let qty_value = Number($qty_input.val())
+        let $product_price = $(`.product_price[data-id=${$(this).data("id")}]`);
         if(qty_value>0){
-            qty_value --
-            $qty_input.val(qty_value)
+            $.ajax({url:"partials/ajax.php",type:"post",data:{itemid:$(this).data("id")} , success:function(result){
+                qty_value --
+                let obj = JSON.parse(result);
+                let item_price = obj[0]['item_price'];
+                let final_price = item_price * qty_value
+                console.log(item_price);
+                $deal_price_amount = $deal_price_amount - item_price ;
+                $deal_price.text($deal_price_amount);
+                $qty_input.val(qty_value)
+                $product_price.text(final_price)
+            }})
         }
     })
     

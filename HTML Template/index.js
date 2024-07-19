@@ -72,6 +72,7 @@ $(function(){
     
     $qty_up.click(function(e){
         let $qty_input = $(`.qty_input[data-id=${$(this).data("id")}]`)
+        console.log($(this).data("id"));
         let qty_value = Number($qty_input.val())
         if(qty_value < 10){
             qty_value ++
